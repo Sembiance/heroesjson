@@ -149,7 +149,7 @@ tiptoe(
 
 		base.info("\nProcessing mounts...");
 		var mounts = Object.values(NODE_MAPS["Mount"]).map(function(mountNode) { return processMountNode(mountNode); }).filterEmpty();
-		
+
 		base.info("\nValidating %d mounts...", mounts.length);
 		mounts.forEach(validateMount);
 
@@ -180,7 +180,7 @@ function processMountNode(mountNode)
 
 	if(!mount.name)
 		return undefined;
-	
+
 	mount.description = S["Mount/Info/" + mount.id];
 	mount.franchise = getValue(mountNode, "Universe", "Starcraft");
 
@@ -191,33 +191,33 @@ function processMountNode(mountNode)
 
 /*
 <CMount id="DiabloRun">
-        <AttributeId value="Diru"/>
-        <Flags index="FreePlay" value="1"/>
-        <VariationIcon value="Assets\Textures\ui_glues_swatch_red.dds"/>
-        <MountCategory value="Ridenone"/>
-		<PreviewCutsceneFile value="Cutscenes\StoreMount_DiabloRun.StormCutscene"/>
-        <TileCutsceneFile value="Cutscenes\FrameMount_DiabloRun.StormCutscene"/>
-        <MiniPortraitCutsceneFile value="Cutscenes\MiniPortrait_DiabloRun.StormCutscene"/>
-        <HeroSelectCutsceneFile value="Cutscenes\HeroSelect_DiabloRun.StormCutscene"/>
-        <Universe value="Diablo"/>
-        <Model value="DiabloMountFX"/>
-        <ProductName value="99200132782000014568"/>
-    </CMount>
- 
+	<AttributeId value="Diru"/>
+	<Flags index="FreePlay" value="1"/>
+	<VariationIcon value="Assets\Textures\ui_glues_swatch_red.dds"/>
+	<MountCategory value="Ridenone"/>
+	<PreviewCutsceneFile value="Cutscenes\StoreMount_DiabloRun.StormCutscene"/>
+	<TileCutsceneFile value="Cutscenes\FrameMount_DiabloRun.StormCutscene"/>
+	<MiniPortraitCutsceneFile value="Cutscenes\MiniPortrait_DiabloRun.StormCutscene"/>
+	<HeroSelectCutsceneFile value="Cutscenes\HeroSelect_DiabloRun.StormCutscene"/>
+	<Universe value="Diablo"/>
+	<Model value="DiabloMountFX"/>
+	<ProductName value="99200132782000014568"/>
+</CMount>
+
 <CMount id="MoneyPig">
-        <AttributeId value="Mpig"/>
-        <VOArray index="Mounted" value="Mount_PiggyBank_Summon"/>
-        <VOArray index="Dismounted" value="Mount_PiggyBank_Dismiss"/>
-        <VOArray index="Moving" value="Mount_MoneyPig_Coin_Drop_Loop"/>
-        <VariationIcon value="Assets\Textures\UI_Glues_Swatch_Yellow_Gold.dds"/>
-        <RequiredRewardArray value="PiggyBank"/>
-        <Universe value="Heroes"/>
-        <ProductName value="99100005841000045267"/>
-        <VariationArray value="MoneyPigPink"/>
-        <VariationArray value="MoneyPigGreen"/>
-        <ReleaseDate Month="10" Day="14"/>
-        <MountCategory value="Ride"/>
-    </CMount>
+	<AttributeId value="Mpig"/>
+	<VOArray index="Mounted" value="Mount_PiggyBank_Summon"/>
+	<VOArray index="Dismounted" value="Mount_PiggyBank_Dismiss"/>
+	<VOArray index="Moving" value="Mount_MoneyPig_Coin_Drop_Loop"/>
+	<VariationIcon value="Assets\Textures\UI_Glues_Swatch_Yellow_Gold.dds"/>
+	<RequiredRewardArray value="PiggyBank"/>
+	<Universe value="Heroes"/>
+	<ProductName value="99100005841000045267"/>
+	<VariationArray value="MoneyPigPink"/>
+	<VariationArray value="MoneyPigGreen"/>
+	<ReleaseDate Month="10" Day="14"/>
+	<MountCategory value="Ride"/>
+</CMount>
  */
 
 	return mount;
@@ -361,10 +361,10 @@ function processHeroNode(heroNode)
 
 		hero.talents[C.HERO_TALENT_LEVELS[((+attributeValue(talentTreeNode, "Tier"))-1)]].push(talent);
 	});
-	
+
 	// Final modifications
-    performHeroModifications(hero);
-	
+	performHeroModifications(hero);
+
 	return hero;
 }
 
@@ -522,7 +522,7 @@ function getUnitAbilities(heroid, heroName, heroAbilityids, heroHeroicAbilityids
 
 		if(!ability.trait && !abilNode)
 			throw new Error("Failed to find ability node: " + layoutButtonNode.toString());
-		
+
 		if(abilNode)
 		{
 			var cmdButtonNode = abilNode.get("CmdButtonArray[@index='Execute']");
@@ -561,7 +561,7 @@ function getUnitAbilities(heroid, heroName, heroAbilityids, heroHeroicAbilityids
 		if(!ability.trait)
 		{
 			ability.shortcut = SHORTCUT_KEY_ORDER[ability.tempSortOrder];
-	
+
 			if(!NODE_MAPS["Abil"][ability.id] && NODE_MAPS["Abil"][abilityCmdid])
 				ability.id = abilityCmdid;
 		}
@@ -636,7 +636,7 @@ function addAbilityDetails(ability, heroid, heroName, abilityCmdid, abilityName)
 		abilityDescription = S["Button/Tooltip/" + C.ABILITY_ID_DESCRIPTION_IDS[heroid][ability.id]] || abilityDescription;
 	if(!abilityDescription)
 		throw new Error("Failed to get ability description: " + ability.id + " and " + abilityCmdid);
-	
+
 	ability.description = getFullDescription(ability.id, abilityDescription, heroid, 0);
 
 	ability.description = ability.description.replace("Heroic Ability\n", "").replace("Heroic Passive\n", "").replace("Trait\n", "");
@@ -765,12 +765,12 @@ function getFullDescription(id, _fullDescription, heroid, heroLevel)
 			//if(heroid==="Tinker") { base.info("after prenthesiszed and regex: %s", parenthesize(formula)); base.info("after prenthesiszed x2: %s", parenthesize(parenthesize(formula))); }
 
 			//Talent,ArtanisBladeDashSolariteReaper,AbilityModificationArray[0].Modifications[0].Value)*(100)
-			
+
 			// Heroes formulas are evaluated Left to Right instead of normal math operation order, so we parenthesize everything. ugh.
 			var result = C.FULLY_PARENTHESIZE.contains(id) ? eval(fullyParenthesize(formula)) : eval(parenthesize(formula));	// jshint ignore:line
-			
+
 			//if(heroid==="Tinker") { base.info("Formula: %s\nResult: %d", formula, result); }
-		
+
 			var MAX_PRECISION = 4;
 			if(result.toFixed(MAX_PRECISION).length<(""+result).length)
 				result = +result.toFixed(MAX_PRECISION);
@@ -793,7 +793,7 @@ function getFullDescription(id, _fullDescription, heroid, heroLevel)
 	fullDescription = fullDescription.replace(/<c\s*val\s*=\s*"[^"]+">/gm, "").replace(/<\/?if\/?>/g, "").trim();
 	fullDescription = fullDescription.replace(/ [.] /g, ". ");
 	fullDescription = fullDescription.replace(/ [.]([0-9]+)/g, " 0.$1");
-	while(fullDescription.indexOf("\n\n")!==-1) { fullDescription = fullDescription.replace(/\n\n/g, "\n"); } 
+	while(fullDescription.indexOf("\n\n")!==-1) { fullDescription = fullDescription.replace(/\n\n/g, "\n"); }
 
 	if(heroLevel===0)
 	{
