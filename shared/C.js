@@ -240,6 +240,7 @@ exports.MOUNT_JSON_SCHEMA =
 	properties           :
 	{
 		id          : { type : "string", minLength : 1 },
+		attributeId : { type : "string", minLength : 1 },
 		name        : { type : "string", minLength : 1 },
 		description : { type : "string", minLength : 1 },
 		franchise   : { type : "string", minLength : 1 },

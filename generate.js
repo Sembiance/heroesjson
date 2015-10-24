@@ -176,6 +176,7 @@ function processMountNode(mountNode)
 {
 	var mount = {};
 	mount.id = attributeValue(mountNode, "id");
+	mount.attributeId = getValue(mountNode, "AttributeId");
 	mount.name = S["Mount/Name/" + mount.id];
 
 	if(!mount.name)
