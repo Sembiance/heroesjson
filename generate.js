@@ -185,13 +185,15 @@ function processMountNode(mountNode)
 {
 	var mount = {};
 	mount.id = attributeValue(mountNode, "id");
+	mount.attributeid = getValue(mountNode, "AttributeId");
 	mount.name = S["Mount/Name/" + mount.id];
 
 	if(!mount.name)
 		return undefined;
 	
 	mount.description = S["Mount/Info/" + mount.id];
-	mount.franchise = getValue(mountNode, "Universe", "Starcraft");
+	mount.category = getValue(mountNode, "MountCategory");
+	mount.franchise = getValue(mountNode, "Universe", "Custom");
 
 	if(!!(+getValue(mountNode, "Flags[@index='IsVariation']", 0)))
 		return undefined;
