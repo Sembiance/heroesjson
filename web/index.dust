@@ -50,6 +50,14 @@
 						<span class="size">{heroesSize}</span>
 					</td>
 				</tr>
+				<tr>
+					<td class="sizeColLeft">
+						<a href="json/mounts.json">mounts.json</a>
+					</td>
+					<td class="sizeColRight">
+						<span class="size">{mountsSize}</span>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 		<br>
