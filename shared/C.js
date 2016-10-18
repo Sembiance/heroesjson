@@ -14,9 +14,12 @@ exports.EXTRA_HEROES_HEROMODS_NAMED =
 	"dehaka"  : "Dehaka",
 	"tracer"  : "Tracer",
 	"chromie" : "Chromie",
-  "medivh"  : "Medivh",
-  "guldan"	: "Guldan",
-  "auriel"	: "Auriel"
+    "medivh"  : "Medivh",
+    "guldan"	: "Guldan",
+    "auriel"	: "Auriel",
+    "alarak"	: "Alarak",
+    "zarya"		: "Zarya",
+    "samuro"    : "Samuro"
 };
 
 exports.SKIP_HERO_IDS = ["GreymaneWorgen", "ChoGallBundleProduct"];
@@ -50,7 +53,7 @@ exports.EXTRA_MOUNT_DATA_FILES = {
 };
 
 // Extra hero data files GameData/Heroes/<hero>Data.xml
-exports.EXTRA_HEROES_GAMEDATA_FILES = ["Chen", "Zagara"];
+exports.EXTRA_HEROES_GAMEDATA_FILES = ["Zagara"];
 
 // Extra hero subfolder files GameData/Heroes/<hero>Data/<hero>Data.xml
 // "Expansion" heroes that have moved into "main" modules.
@@ -59,10 +62,12 @@ exports.EXTRA_HEROES_GAMEDATA_FOLDERS = [
 	"Artanis",
 	"Azmodan",
 	"Butcher",
+	"Chen",
 	"Crusader",
-	"Jaina",
+	"DemonHunter",
 	"Dryad",
 	"Genn",
+	"Jaina",
 	"Kaelthas",
 	"Leoric",
 	"LostVikings",
@@ -71,12 +76,14 @@ exports.EXTRA_HEROES_GAMEDATA_FOLDERS = [
 	"Murky",
 	"Necromancer",
 	"Rexxar",
-	"SgtHammer",
 	"Stitches",
 	"Sylvanas",
 	"Thrall",
 	"Uther",
-	"Wizard"
+	"WitchDoctor",
+	"Wizard",
+	"Tinker",
+    "Samuro"
 ];
 
 exports.HERO_MODIFICATIONS =
@@ -99,8 +106,8 @@ exports.HERO_MODIFICATIONS =
 
 exports.MOUNT_MODIFICATIONS =
 {
-	"Random" : [ 
-		{ path : ":root", name : "description", value : "A random mount."}, 
+	"Random" : [
+		{ path : ":root", name : "description", value : "A random mount."},
 		{ path : ":root", name : "category", value : "Random"}
 	],
 	"Mechanospider" : [ { path : ":root", name : "franchise", value : "Warcraft"} ],
@@ -239,7 +246,17 @@ exports.FORMULA_PRE_REPLACEMENTS =
 	{   // 42742
 		  match : "Behavior,ChromieTimeTrapChronoSicknessSlow,MaxStackCount",
 		replace : "1"
+	},
+	{   // 42742
+		  match : "$BehaviorTokenCount:AurielRayOfHeavenReservoirOfHopeQuestToken$*Behavior,AurielRayOfHeavenReservoirOfHopeBonusEnergy,Modification.VitalMaxArray[Energy])",
+		replace : "Behavior,AurielRayOfHeavenReservoirOfHopeBonusEnergy,Modification.VitalMaxArray[Energy])"
+	},
+	{   // 42742
+		  match : "((Effect,ZaryaExpulsionZoneInitialSearchArea,AreaArray[0].Radius+.Value+Talent,ZaryaExpulsionZoneClearOut,AbilityModificationArray[0].Modifications[1].Value)/Effect,ZaryaExpulsionZoneInitialSearchArea,AreaArray[0].Radius)-1)*100",
+		replace : "((Effect,ZaryaExpulsionZoneInitialSearchArea,AreaArray[0].Radius+Talent,ZaryaExpulsionZoneClearOut,AbilityModificationArray[0].Modifications[1].Value)/Effect,ZaryaExpulsionZoneInitialSearchArea,AreaArray[0].Radius)-1)*100"
 	}
+
+
 
 ];
 
@@ -477,8 +494,8 @@ exports.HERO_JSON_SCHEMA =
 var HERO_TALENT_TIER_JSON_SCHEMA =
 {
 	type : "array",
-	minItems : 3,
-	maxItems : 5,
+	minItems : 1,
+	maxItems : 7,
 	items :
 		{
 			type : "object",
