@@ -10,7 +10,7 @@
     "glob": "^5.0.15",
     "jsen": "^0.6.0",
     "moment": "^2.10.6",
-    "libxmljs": "^0.14.3",
+    "libxmljs": "0.18.0",
     "rimraf": "^2.4.5",
     "tiptoe": "^1.0.0",
     "@sembiance/xutil": "git://github.com/Sembiance/xutil.git",

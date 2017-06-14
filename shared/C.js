@@ -8,18 +8,26 @@ exports.EXTRA_HEROES_HEROMODS = ["chogall"];
 // Extra hero files in "mods/heromods/" + heroName + ".stormmod/base.stormdata/GameData/" + gameDataName + "Data.xml"
 exports.EXTRA_HEROES_HEROMODS_NAMED =
 {
-	"chogall" : "ChoGall",
-	"wizard"  : "Wizard",
-	"necromancer" : "Necromancer",
-	"dehaka"  : "Dehaka",
-	"tracer"  : "Tracer",
-	"chromie" : "Chromie",
-  "medivh"  : "Medivh",
-  "guldan"	: "Guldan",
-  "auriel"	: "Auriel",
-  "alarak"	: "Alarak",
-  "zarya"		: "Zarya",
-  "samuro"		: "Samuro"
+    "chogall" : "ChoGall",
+    "wizard"  : "Wizard",
+    "necromancer" : "Necromancer",
+    "dehaka"  : "Dehaka",
+    "tracer"  : "Tracer",
+    "chromie" : "Chromie",
+    "medivh"  : "Medivh",
+    "guldan"	: "Guldan",
+    "auriel"	: "Auriel",
+    "alarak"	: "Alarak",
+    "zarya"		: "Zarya",
+    "samuro"		: "Samuro",
+    "amazon" : "amazon",
+    "dva": "dva",
+    "lucio": "lucio",
+    "probius" : "probius",
+    "thefirelods": "thefirelods",
+    "valeera": "valeera",
+    "zuljin": "zuljin",
+    "varian": "varian"
 };
 
 exports.SKIP_HERO_IDS = ["GreymaneWorgen", "ChoGallBundleProduct"];
@@ -100,7 +108,7 @@ exports.HERO_MODIFICATIONS =
 	],
 	"Medic" : [ { path : ":root .abilities .Medic *:nth-child(6)", remove : ["cooldown"]} ],
 	"Wizard" : [ { path : ":root", name : "releaseDate", value : "2016-02-02" } ],
-	"Guldan" : [ { path : ":root", name : "ratings", value : { damage : 8, utility : 3, survivability : 5, complexity : 6 } } ],
+	"Guldan" : [ { path : ":root", name : "ratings", value : { damage : 8, utility : 3, survivability : 5, complexity : 6 } } ]
 };
 
 exports.MOUNT_MODIFICATIONS =
@@ -153,7 +161,7 @@ exports.VALID_UNIT_ABILITY_IDS =
 
 exports.ACTIVATABLE_ABILITY_IDS =
 {
-  "Xul"    : ["NecromancerBoneArmor"],
+    "Xul"    : ["NecromancerBoneArmor"],
 	"Rexxar" : ["RexxarMishaFollow", "RexxarMishaFollowCancel"]
 };
 
@@ -253,7 +261,101 @@ exports.FORMULA_PRE_REPLACEMENTS =
 	{   // 42742
 		  match : "((Effect,ZaryaExpulsionZoneInitialSearchArea,AreaArray[0].Radius+.Value+Talent,ZaryaExpulsionZoneClearOut,AbilityModificationArray[0].Modifications[1].Value)/Effect,ZaryaExpulsionZoneInitialSearchArea,AreaArray[0].Radius)-1)*100",
 		replace : "((Effect,ZaryaExpulsionZoneInitialSearchArea,AreaArray[0].Radius+Talent,ZaryaExpulsionZoneClearOut,AbilityModificationArray[0].Modifications[1].Value)/Effect,ZaryaExpulsionZoneInitialSearchArea,AreaArray[0].Radius)-1)*100"
-	}
+	},
+    {   // 42742
+    match : "Accumulator,AzmodanGlobeOfAnnihilationTasteForBloodAccumulator,Scale",
+    replace : "1"
+    },
+    {   // 42742
+    match : "Effect,LiLiBlindingWindTooltipUntalentedDamage,Amount",
+    replace : "1"
+    },
+    {   // 42742
+        match : "Behavior,AbathurEvolveMonstrosityDamageReduction50,ArmorModification.ArmorSet[Minion].ArmorMitigationTable[Basic]",
+        replace : "1"
+    },
+    {   // 42742
+        match : "Unit,HeroRaynor,Sight-Unit,HeroDemonHunter,Sight",
+        replace : "1"
+    },
+    {   // 42742
+        match : "Accumulator,TalentSeasonedMarksmanAccumulator,Scale*Effect,TalentSeasonedMarksmanAdd2TokenCount,Value",
+        replace : "1"
+    },    {   // 42742
+        match : "Accumulator,TalentSeasonedMarksmanAccumulator,Scale*Effect,TalentSeasonedMarksmanAdd5TokenCount,Value",
+        replace : "1"
+    },   {   // 42742
+        match : "Talent,GenericTalentSeasonedMarksman,QuestData.TargetCount*Accumulator,TalentSeasonedMarksmanAccumulator,Scale",
+        replace : "1"
+    },   {   // 42742
+        match : "Behavior,TalentBucketVigorousAssault,Modification.VitalDamageLeechArray[0].KindArray[1] * 100",
+        replace : "1"
+    },   {   // 42742
+        match : "Behavior,FalstadHammerGains,Modification.VitalDamageLeechArray[0].KindArray[1] * 100",
+        replace : "1"
+    },   {   // 42742
+        match : "Accumulator,HeroGenericRegenerationMasterAccumulator,Scale",
+        replace : "1"
+    },   {   // 42742
+        match : "Behavior,TalentBucketVigorousStrike,Modification.VitalDamageLeechArray[0].KindArray[1] * 100",
+        replace : "1"
+    },
+   {   // 42742
+        match : "Effect,AnubarakBeetleSpitBeetleDamage,MultiplicativeModifierArray[Anub'arakLeechingScarabsDamage].Modifier*100",
+        replace : "1"
+    },{   // 42742
+        match : "-100*Behavior,ChenBreathofFireWitheringFlamesTalentDebuff,Modification.DamageDealtFraction[Ability]",
+        replace : "1"
+    },{   // 42742
+        match : " Behavior,ChenBreathofFireWitheringFlamesTalentDebuff,Duration",
+        replace : "1"
+    },{   // 42742
+        match : "Effect,RexxarAnimalHusbandryModifyTokenCounter,Value*Accumulator,RexxarAnimalHusbandryHealthAccumulator,Scale",
+        replace : "1"
+    },{   // 42742
+        match : "Effect,RexxarSpiritSwoopAspectoftheHawkTalentModifyBehaviorDuration,Value",
+        replace : "1"
+    },{   // 42742
+        match : "100*Effect,ChoHeroWeaponDamage,MultiplicativeModifierArray[1].Modifier",
+        replace : "1"
+    },{   // 42742
+        match : "Effect,ChoWillofChoModifyToken,Value*Effect,ChoWillofChoModifyTokenPersistent,PeriodCount",
+        replace : "1"
+    },
+    {	// 42742
+        match : 'Effect,GallTheWillofGallModifyTokenCount,Value*Effect,GallWillofGallModifyTokenPersistent,PeriodCount',
+        replace : 'Effect,GallTheWillofGallTokenCounter,Scale,GallWillofGallModifyTokenPersistent,PeriodCount'
+    },
+    {	// 42742
+        match : 'Behavior,DVaBoostersMoveSpeedActive,Modification.MoveSpeedMaximum/Unit,HeroDVaMech,Speed-1*100',
+        replace : 'Behavior,DVaBoostersMoveSpeedActive,Modification.MoveSpeedMaximum/Unit,DVaMechPlacementDummy,Speed-100'
+    },{	// 42742
+        match : '(Accumulator,DVaBoostersHitTheNitrousTokenAccumulator,Scale*Behavior,DVaBoostersHitTheNitrousToken,Init+Behavior,DVaBoostersMoveSpeedActive,Modification.MoveSpeedMaximum)/(Unit,HeroDVaMech,Speed)-1*100',
+        replace : '1'
+    },{	// 42742
+        match : 'Behavior,LucioWallRideSpeed,Modification.MoveSpeedBonus/Unit,HeroLucio,Speed*100',
+        replace : '1'
+    },
+    { match : '(Accumulator,LucioWallRideAccelerandoTokenAccumulator,MaxAccumulation/Unit,HeroLucio,Speed)+(Behavior,LucioWallRideSpeed,Modification.MoveSpeedBonus/Unit,HeroLucio,Speed)*100',
+        replace : '1'
+    }, { match : '(0.6-Behavior,ProbiusWorkerRushPassive,Modification.UnifiedMoveSpeedFactor)*100',
+        replace : '1'
+    },{ match : '(Behavior,ProbiusWorkerRushMoveSpeed,Modification.UnifiedMoveSpeedFactor-Behavior,ProbiusWorkerRushPassive,Modification.UnifiedMoveSpeedFactor)*100',
+        replace : '1'
+    },{ match : 'Behavior,ProbiusWorkerRushPassive,Modification.MoveSpeedBonus / Unit,HeroProbius,Speed * 100',
+        replace : '1'
+    },{ match : 'Behavior,ProbiusWorkerRushTurboChargedPassive,Modification.MoveSpeedBonus / Unit,HeroProbius,Speed * 100',
+        replace : '1'
+    },{ match : 'Effect,ValeeraInitiativeComboPointApply,Count+Talent,ValeeraVanishInitiative,AbilityModificationArray[0].Modifications[0].Value',
+        replace : '1'
+    },{ match : 'Behavior,ValeeraGarroteStrangleAbilityPowerReduction,Modification.DamageDealtFraction*100*(-1)',
+        replace : '1'
+    },{ match : 'Accumulator,ZuljinBerserkerHealthToAttackSpeed,Ratio',
+        replace : '1'
+    },{ match : 'Behavior,ChenBreathofFireWitheringFlamesTalentDebuff,Duration',
+        replace : '1'
+    },
+
 	
 
 
@@ -316,7 +418,15 @@ exports.XMLREF_REPLACEMENTS =
 	{	// 42742
 		from : 'Unit,HeroChromie,Sight',
 		  to : 'Behavior,ChromieDragonsBreathDeepBreathingMaxStack,Modification.SightBonus'
-	}
+	},
+	{	// 42742
+		from : 'Unit,HeroChromie,Sight',
+		  to : 'Behavior,ChromieDragonsBreathDeepBreathingMaxStack,Modification.SightBonus'
+	},
+    ,{	// 42742
+    from : 'Behavior,DVaBoostersMoveSpeedActive,Modification.MoveSpeedMaximum/Unit,HeroDVaMech,Speed-1*100',
+    to : 'Behavior,HeroDVaMech,Modification.MoveSpeedMaximum/Unit,DVaMechPlacementDummy,Speed-100'
+    },
 ];
 
 exports.REMOVE_SUBUNITS =
@@ -324,7 +434,7 @@ exports.REMOVE_SUBUNITS =
 	"LostVikings" : ["HeroBaleog", "HeroErik", "HeroOlaf"],
 	"Chen"        : ["HeroChenEarth", "HeroChenFire", "HeroChenStorm"],
 	"Medic"       : ["MedicMedivacDropship"],
-	"Medivh"			: ["HeroMedivhRaven"]
+    "Medivh"      : ["HeroMedivhRaven"]
 };
 
 exports.IMPORT_ABILITIES_FROM_SUBUNIT =
